@@ -180,7 +180,7 @@ REQUESTLOGS = {
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 # timeout tempo de inatividate no sistema
-SESSION_EXPIRE_SECONDS = 10
+SESSION_EXPIRE_SECONDS = 60
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 # SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 60
 SESSION_TIMEOUT_REDIRECT = 'http://localhost:8000/contas/timeout'
