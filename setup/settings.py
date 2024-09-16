@@ -18,6 +18,9 @@ from corsheaders.defaults import default_headers
 from django.contrib.messages import constants
 
 
+AUTH_USER_MODEL = "contas.MyUser"
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
@@ -75,20 +78,22 @@ THIRD_APPS = [
 ]
 PROJECT_APPS = [
     'apps.base.apps.BaseConfig',
-    'apps.pages.apps.PagesConfig'
+    'apps.pages.apps.PagesConfig',
+    'apps.contas.apps.ContasConfig'
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',  # timeout
     "corsheaders.middleware.CorsMiddleware",  # Cors
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'requestlogs.middleware.RequestLogsMiddleware',
+    'requestlogs.middleware.RequestLogsMiddleware',  # logs
 ]
 
 ROOT_URLCONF = 'setup.urls'
@@ -173,6 +178,16 @@ REQUESTLOGS = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
+
+# timeout tempo de inatividate no sistema
+SESSION_EXPIRE_SECONDS = 10
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+# SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 60
+SESSION_TIMEOUT_REDIRECT = 'http://localhost:8000/contas/timeout'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 LANGUAGE_CODE = 'pt-br'
 
