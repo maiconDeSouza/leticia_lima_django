@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -10,6 +11,11 @@ from django.contrib.auth.models import Group, User
 
 def timeout_view(request):
     return render(request, 'timeout.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 def login_view(request):
