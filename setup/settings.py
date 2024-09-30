@@ -36,6 +36,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG")
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -65,6 +66,7 @@ if not DEBUG:
 # Application definition
 
 DJANGO_APPS = [
+    'apps.contas.apps.ContasConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -79,7 +81,6 @@ THIRD_APPS = [
 PROJECT_APPS = [
     'apps.base.apps.BaseConfig',
     'apps.pages.apps.PagesConfig',
-    'apps.contas.apps.ContasConfig'
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + PROJECT_APPS
 
